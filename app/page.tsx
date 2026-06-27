@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { supabase } from "../supabase";
 
 // ──────────────────────────────────────────────────────────────
 // properstock · 메모리 반도체 적정가 대시보드 (공개 v1)
@@ -165,10 +166,13 @@ export default function ProperstockDashboard() {
   function edit(id, key, val) {
     setRows((prev) => prev.map((r) => (r.id === id ? { ...r, [key]: val } : r)));
   }
-  function submitEmail() {
+  async function submitEmail() {
     if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) return;
-    // TODO(properstock): 여기에 Supabase insert 연결
-    //   await supabase.from('emails').insert({ email, source: 'dashboard_v1' });
+    try {
+      await supabase.from("emails").insert({ email, source: "dashboard_v1" });
+    } catch (_) {
+      // 중복 가입 등은 조용히 넘김 — 사용자 경험은 동일하게 "신청 완료"
+    }
     setSent(true);
   }
 
