@@ -20,10 +20,10 @@ const BASE_DATE = "2026-06-26";
 // perCons = 현재 선행PER(보수: 지금 멀티플 유지)
 // perAgg  = 공격(한국이 미국 피어 12배까지 재평가 / 미국은 피어 유지)
 const SEED = [
-  { id: "samsung", name: "삼성전자", ticker: "005930", cur: "KRW", price: 340500,  eps: 52500,  perCons: 6.5,  perAgg: 12 },
-  { id: "hynix",   name: "SK하이닉스", ticker: "000660", cur: "KRW", price: 2700000, eps: 370000, perCons: 7.0,  perAgg: 12 },
-  { id: "micron",  name: "마이크론",   ticker: "MU",     cur: "USD", price: 1030,    eps: 92,     perCons: 11.2, perAgg: 12 },
-  { id: "sandisk", name: "샌디스크",   ticker: "SNDK",   cur: "USD", price: 2200,    eps: 179,    perCons: 12.3, perAgg: 12 },
+  { id: "samsung", name: "삼성전자", ticker: "005930", cur: "KRW", price: 340500,  eps: 52500,  perCons: 6.5,  perAgg: 12, note: "메모리 회복 + HBM 추격이 12배 정당화 근거. 리스크: HBM3E 엔비디아 납품 지연, 파운드리 적자." },
+  { id: "hynix",   name: "SK하이닉스", ticker: "000660", cur: "KRW", price: 2700000, eps: 370000, perCons: 7.0,  perAgg: 12, note: "HBM 1위·LTA로 이익 가시성 확보 = 12배 정당화. 리스크: CXMT 범용 D램 공급 과잉, 외국인 수급 이탈." },
+  { id: "micron",  name: "마이크론",   ticker: "MU",     cur: "USD", price: 1030,    eps: 92,     perCons: 11.2, perAgg: 12, note: "FY26 Q3 서프라이즈로 신고가, 12배면 거의 적정. 리스크: '셀 더 뉴스' 패턴 + 실적 정점 역PER 트랩." },
+  { id: "sandisk", name: "샌디스크",   ticker: "SNDK",   cur: "USD", price: 2200,    eps: 179,    perCons: 12.3, perAgg: 12, note: "NAND 순수 플레이 + AI 스토리지 수요 수혜. 리스크: NAND 가격 변동성, D램보다 약한 공급 조절." },
 ];
 
 const C = {
@@ -135,6 +135,8 @@ function StockCard({ row, onEdit }) {
           <strong style={{ color: sig }}>{priceLabel(fair, row.cur)}</strong>
         </div>
       </div>
+
+      {row.note && <p className="ps-note">{row.note}</p>}
     </div>
   );
 }
@@ -335,6 +337,9 @@ const styles = `
   border:1px solid var(--line);border-radius:7px;padding:5px 7px;background:#fff;text-align:right;
 }
 .ps-input:focus{outline:none;border-color:var(--petrol);box-shadow:0 0 0 2px ${C.petrolBg};}
+
+.ps-note{margin:12px 0 0;padding-top:11px;border-top:1px dashed var(--line);
+  font-size:11.5px;line-height:1.55;color:var(--muted);letter-spacing:-.005em;}
 
 .ps-capture{margin-top:18px;background:var(--ink);color:#fff;border-radius:16px;padding:18px;
   display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;}
