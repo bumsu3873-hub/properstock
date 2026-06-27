@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { supabase } from "..//supabase";
+import { supabase } from "..//../supabase";
 
 const seed = [
   { id: 1, name: "SK하이닉스", eps: "55000", per: "9", price: "420000" },
